@@ -70,7 +70,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-violet-50">
+    <div className="min-h-screen bg-background">
       <div className="flex">
         <CollectionSidebar 
           collections={collections}
@@ -78,22 +78,22 @@ const Index = () => {
           onSelectCollection={setSelectedCollection}
         />
         
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-4 md:p-6">
           {/* Header */}
           <div className="mb-8">
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
               <div>
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-violet-600 to-blue-600 bg-clip-text text-transparent">
+                <h1 className="text-3xl md:text-4xl font-bold neon-pink neon-glow animate-neon-pulse">
                   Bibliothèque IA
                 </h1>
-                <p className="text-slate-600 mt-2">
+                <p className="text-muted-foreground mt-2 text-sm md:text-base">
                   Organisez vos références de prompts et images d'IA générative
                 </p>
               </div>
               
               <Button 
                 onClick={() => setIsAddModalOpen(true)}
-                className="bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-700 hover:to-blue-700 text-white"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground neon-border w-full md:w-auto"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Ajouter une référence
@@ -101,14 +101,14 @@ const Index = () => {
             </div>
 
             {/* Search and filters */}
-            <div className="flex items-center gap-4 mb-6">
+            <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
               <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                 <Input
                   placeholder="Rechercher par titre, prompt ou tags..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 bg-card border-border neon-cyan/20 focus:neon-border"
                 />
               </div>
               
@@ -117,6 +117,7 @@ const Index = () => {
                   variant={viewMode === 'grid' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setViewMode('grid')}
+                  className={viewMode === 'grid' ? 'neon-border' : ''}
                 >
                   <Grid className="h-4 w-4" />
                 </Button>
@@ -124,6 +125,7 @@ const Index = () => {
                   variant={viewMode === 'list' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setViewMode('list')}
+                  className={viewMode === 'list' ? 'neon-border' : ''}
                 >
                   <List className="h-4 w-4" />
                 </Button>
@@ -131,16 +133,16 @@ const Index = () => {
             </div>
 
             {/* Stats */}
-            <div className="flex items-center gap-6 text-sm text-slate-600">
-              <span>{filteredReferences.length} référence{filteredReferences.length !== 1 ? 's' : ''}</span>
-              <span>•</span>
-              <span>{collections.length - 1} collection{collections.length !== 2 ? 's' : ''}</span>
+            <div className="flex items-center gap-4 md:gap-6 text-xs md:text-sm text-muted-foreground">
+              <span className="neon-green">{filteredReferences.length} référence{filteredReferences.length !== 1 ? 's' : ''}</span>
+              <span className="neon-purple">•</span>
+              <span className="neon-blue">{collections.length - 1} collection{collections.length !== 2 ? 's' : ''}</span>
             </div>
           </div>
 
           {/* References Grid */}
           <div className={viewMode === 'grid' 
-            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" 
+            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6" 
             : "space-y-4"
           }>
             {filteredReferences.map(reference => (
@@ -154,8 +156,8 @@ const Index = () => {
 
           {filteredReferences.length === 0 && (
             <div className="text-center py-12">
-              <div className="text-slate-400 text-lg mb-2">Aucune référence trouvée</div>
-              <p className="text-slate-500">
+              <div className="text-muted-foreground text-lg mb-2 neon-pink neon-glow">Aucune référence trouvée</div>
+              <p className="text-muted-foreground text-sm md:text-base">
                 {searchQuery || selectedCollection !== 'Tous' 
                   ? 'Essayez de modifier vos critères de recherche'
                   : 'Commencez par ajouter votre première référence'
