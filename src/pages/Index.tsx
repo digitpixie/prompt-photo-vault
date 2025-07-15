@@ -83,7 +83,7 @@ const Index = () => {
           <div className="mb-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
               <div>
-                <h1 className="text-3xl md:text-4xl font-bold neon-pink neon-glow animate-neon-pulse">
+                <h1 className="text-3xl md:text-4xl font-bold text-foreground neon-purple neon-glow animate-neon-pulse">
                   Bibliothèque IA
                 </h1>
                 <p className="text-muted-foreground mt-2 text-sm md:text-base">
@@ -108,7 +108,7 @@ const Index = () => {
                   placeholder="Rechercher par titre, prompt ou tags..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 bg-card border-border neon-cyan/20 focus:neon-border"
+                  className="pl-10 bg-card border-border neon-cyan/20 focus:neon-border text-foreground"
                 />
               </div>
               
@@ -134,9 +134,9 @@ const Index = () => {
 
             {/* Stats */}
             <div className="flex items-center gap-4 md:gap-6 text-xs md:text-sm text-muted-foreground">
-              <span className="neon-green">{filteredReferences.length} référence{filteredReferences.length !== 1 ? 's' : ''}</span>
+              <span className="neon-cyan">{filteredReferences.length} référence{filteredReferences.length !== 1 ? 's' : ''}</span>
               <span className="neon-purple">•</span>
-              <span className="neon-blue">{collections.length - 1} collection{collections.length !== 2 ? 's' : ''}</span>
+              <span className="neon-violet">{collections.length - 1} collection{collections.length !== 2 ? 's' : ''}</span>
             </div>
           </div>
 
@@ -156,7 +156,7 @@ const Index = () => {
 
           {filteredReferences.length === 0 && (
             <div className="text-center py-12">
-              <div className="text-muted-foreground text-lg mb-2 neon-pink neon-glow">Aucune référence trouvée</div>
+              <div className="text-foreground text-lg mb-2 neon-purple neon-glow">Aucune référence trouvée</div>
               <p className="text-muted-foreground text-sm md:text-base">
                 {searchQuery || selectedCollection !== 'Tous' 
                   ? 'Essayez de modifier vos critères de recherche'

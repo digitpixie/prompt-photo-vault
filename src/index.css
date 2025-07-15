@@ -18,7 +18,7 @@ All colors MUST be HSL.
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 317 100% 54%;
+    --primary: 271 81% 56%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 240 3.7% 15.9%;
@@ -35,24 +35,23 @@ All colors MUST be HSL.
 
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 317 100% 54%;
+    --ring: 271 81% 56%;
 
     --radius: 0.5rem;
 
     --sidebar-background: 240 10% 3.9%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 317 100% 54%;
+    --sidebar-primary: 271 81% 56%;
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 0 0% 98%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 317 100% 54%;
+    --sidebar-ring: 271 81% 56%;
 
-    /* Neon colors */
+    /* Neon colors - violet theme */
     --neon-cyan: 180 100% 50%;
-    --neon-pink: 317 100% 54%;
     --neon-purple: 271 81% 56%;
-    --neon-green: 120 100% 50%;
+    --neon-violet: 260 100% 70%;
     --neon-blue: 240 100% 70%;
   }
 
@@ -66,7 +65,7 @@ All colors MUST be HSL.
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 317 100% 54%;
+    --primary: 271 81% 56%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 240 3.7% 15.9%;
@@ -83,15 +82,15 @@ All colors MUST be HSL.
 
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 317 100% 54%;
+    --ring: 271 81% 56%;
     --sidebar-background: 240 10% 3.9%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 317 100% 54%;
+    --sidebar-primary: 271 81% 56%;
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 0 0% 98%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 317 100% 54%;
+    --sidebar-ring: 271 81% 56%;
   }
 }
 
@@ -118,16 +117,12 @@ All colors MUST be HSL.
     color: hsl(var(--neon-cyan));
   }
   
-  .neon-pink {
-    color: hsl(var(--neon-pink));
-  }
-  
   .neon-purple {
     color: hsl(var(--neon-purple));
   }
   
-  .neon-green {
-    color: hsl(var(--neon-green));
+  .neon-violet {
+    color: hsl(var(--neon-violet));
   }
   
   .neon-blue {
