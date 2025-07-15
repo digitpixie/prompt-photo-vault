@@ -1,12 +1,176 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState } from 'react';
+import { Search, Plus, Filter, Grid, List } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { ReferenceCard } from '@/components/ReferenceCard';
+import { AddReferenceModal } from '@/components/AddReferenceModal';
+import { CollectionSidebar } from '@/components/CollectionSidebar';
+
+interface Reference {
+  id: string;
+  title: string;
+  prompt: string;
+  image: string;
+  tags: string[];
+  collection: string;
+  createdAt: Date;
+  model?: string;
+  parameters?: string;
+}
 
 const Index = () => {
+  const [references, setReferences] = useState<Reference[]>([
+    {
+      id: '1',
+      title: 'Portrait Cyberpunk',
+      prompt: 'Portrait of a cyberpunk woman with neon hair, futuristic city background, cinematic lighting, highly detailed, 8k resolution',
+      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=400&fit=crop',
+      tags: ['portrait', 'cyberpunk', 'neon', 'futuristic'],
+      collection: 'Portraits',
+      createdAt: new Date(),
+      model: 'Midjourney v6',
+      parameters: '--ar 1:1 --style raw'
+    },
+    {
+      id: '2',
+      title: 'Fantasy Landscape',
+      prompt: 'Mystical forest with floating islands, magical glowing crystals, ethereal lighting, fantasy art style, concept art',
+      image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=400&fit=crop',
+      tags: ['landscape', 'fantasy', 'magical', 'forest'],
+      collection: 'Landscapes',
+      createdAt: new Date(),
+      model: 'DALL-E 3',
+      parameters: 'HD quality'
+    }
+  ]);
+
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCollection, setSelectedCollection] = useState('Tous');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+
+  const collections = ['Tous', ...Array.from(new Set(references.map(ref => ref.collection)))];
+
+  const filteredReferences = references.filter(ref => {
+    const matchesSearch = ref.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         ref.prompt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         ref.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesCollection = selectedCollection === 'Tous' || ref.collection === selectedCollection;
+    return matchesSearch && matchesCollection;
+  });
+
+  const addReference = (newReference: Omit<Reference, 'id' | 'createdAt'>) => {
+    const reference: Reference = {
+      ...newReference,
+      id: Date.now().toString(),
+      createdAt: new Date()
+    };
+    setReferences(prev => [reference, ...prev]);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-violet-50">
+      <div className="flex">
+        <CollectionSidebar 
+          collections={collections}
+          selectedCollection={selectedCollection}
+          onSelectCollection={setSelectedCollection}
+        />
+        
+        <main className="flex-1 p-6">
+          {/* Header */}
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h1 className="text-4xl font-bold bg-gradient-to-r from-violet-600 to-blue-600 bg-clip-text text-transparent">
+                  Bibliothèque IA
+                </h1>
+                <p className="text-slate-600 mt-2">
+                  Organisez vos références de prompts et images d'IA générative
+                </p>
+              </div>
+              
+              <Button 
+                onClick={() => setIsAddModalOpen(true)}
+                className="bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-700 hover:to-blue-700 text-white"
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                Ajouter une référence
+              </Button>
+            </div>
+
+            {/* Search and filters */}
+            <div className="flex items-center gap-4 mb-6">
+              <div className="relative flex-1 max-w-md">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                <Input
+                  placeholder="Rechercher par titre, prompt ou tags..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+              
+              <div className="flex items-center gap-2">
+                <Button
+                  variant={viewMode === 'grid' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setViewMode('grid')}
+                >
+                  <Grid className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant={viewMode === 'list' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setViewMode('list')}
+                >
+                  <List className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+
+            {/* Stats */}
+            <div className="flex items-center gap-6 text-sm text-slate-600">
+              <span>{filteredReferences.length} référence{filteredReferences.length !== 1 ? 's' : ''}</span>
+              <span>•</span>
+              <span>{collections.length - 1} collection{collections.length !== 2 ? 's' : ''}</span>
+            </div>
+          </div>
+
+          {/* References Grid */}
+          <div className={viewMode === 'grid' 
+            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" 
+            : "space-y-4"
+          }>
+            {filteredReferences.map(reference => (
+              <ReferenceCard 
+                key={reference.id}
+                reference={reference}
+                viewMode={viewMode}
+              />
+            ))}
+          </div>
+
+          {filteredReferences.length === 0 && (
+            <div className="text-center py-12">
+              <div className="text-slate-400 text-lg mb-2">Aucune référence trouvée</div>
+              <p className="text-slate-500">
+                {searchQuery || selectedCollection !== 'Tous' 
+                  ? 'Essayez de modifier vos critères de recherche'
+                  : 'Commencez par ajouter votre première référence'
+                }
+              </p>
+            </div>
+          )}
+        </main>
       </div>
+
+      <AddReferenceModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onAdd={addReference}
+      />
     </div>
   );
 };
