@@ -43,7 +43,7 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
   if (viewMode === 'list') {
     return (
       <>
-        <Card className="group hover:shadow-lg transition-all duration-300 border-slate-200">
+        <Card className="group hover:shadow-lg transition-all duration-300 border-border bg-card">
           <div className="flex">
             <div className="w-32 h-32 flex-shrink-0">
               <img
@@ -55,7 +55,7 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
             
             <div className="flex-1 p-4">
               <div className="flex items-start justify-between mb-2">
-                <h3 className="font-semibold text-slate-800 line-clamp-1">{reference.title}</h3>
+                <h3 className="font-semibold text-white line-clamp-1">{reference.title}</h3>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -66,7 +66,7 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
                 </Button>
               </div>
               
-              <p className="text-slate-600 text-sm line-clamp-2 mb-3">{reference.prompt}</p>
+              <p className="text-white text-sm line-clamp-2 mb-3">{reference.prompt}</p>
               
               <div className="flex items-center justify-between">
                 <div className="flex flex-wrap gap-1">
@@ -83,7 +83,7 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
                 </div>
                 
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-slate-500 flex items-center gap-1">
+                  <span className="text-xs text-white flex items-center gap-1">
                     <Calendar className="h-3 w-3" />
                     {formatDate(reference.createdAt)}
                   </span>
@@ -112,7 +112,7 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
 
   return (
     <>
-      <Card className="group hover:shadow-xl transition-all duration-300 border-slate-200 overflow-hidden">
+      <Card className="group hover:shadow-xl transition-all duration-300 border-border bg-card overflow-hidden">
         <div className="relative">
           <img
             src={reference.image}
@@ -125,7 +125,7 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
               variant="secondary"
               size="sm"
               onClick={() => setIsDetailOpen(true)}
-              className="bg-white/90 hover:bg-white"
+              className="bg-white/90 hover:bg-white text-black"
             >
               <Eye className="h-4 w-4" />
             </Button>
@@ -134,13 +134,13 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
 
         <CardHeader className="pb-2">
           <div className="flex items-start justify-between">
-            <h3 className="font-semibold text-slate-800 line-clamp-1">{reference.title}</h3>
+            <h3 className="font-semibold text-white line-clamp-1">{reference.title}</h3>
             <Badge variant="outline" className="text-xs">{reference.collection}</Badge>
           </div>
         </CardHeader>
 
         <CardContent className="pb-2">
-          <p className="text-slate-600 text-sm line-clamp-3 mb-3">{reference.prompt}</p>
+          <p className="text-white text-sm line-clamp-3 mb-3">{reference.prompt}</p>
           
           <div className="flex flex-wrap gap-1 mb-3">
             {reference.tags.slice(0, 3).map(tag => (
@@ -156,7 +156,7 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
           </div>
 
           {reference.model && (
-            <div className="flex items-center gap-1 text-xs text-slate-500 mb-2">
+            <div className="flex items-center gap-1 text-xs text-white mb-2">
               <Cpu className="h-3 w-3" />
               {reference.model}
             </div>
@@ -164,7 +164,7 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
         </CardContent>
 
         <CardFooter className="pt-2 flex items-center justify-between">
-          <span className="text-xs text-slate-500 flex items-center gap-1">
+          <span className="text-xs text-white flex items-center gap-1">
             <Calendar className="h-3 w-3" />
             {formatDate(reference.createdAt)}
           </span>
