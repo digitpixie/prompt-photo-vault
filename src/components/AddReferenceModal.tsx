@@ -103,7 +103,7 @@ export const AddReferenceModal = ({ isOpen, onClose, onAdd }: AddReferenceModalP
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold bg-gradient-to-r from-violet-600 to-blue-600 bg-clip-text text-transparent">
+          <DialogTitle className="text-xl font-semibold text-foreground neon-purple">
             Ajouter une nouvelle référence
           </DialogTitle>
         </DialogHeader>
@@ -112,7 +112,7 @@ export const AddReferenceModal = ({ isOpen, onClose, onAdd }: AddReferenceModalP
           {/* Image Upload */}
           <div className="space-y-2">
             <Label htmlFor="image">Image *</Label>
-            <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-violet-400 transition-colors">
+            <div className="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary transition-colors">
               {formData.image ? (
                 <div className="relative">
                   <img
@@ -135,9 +135,9 @@ export const AddReferenceModal = ({ isOpen, onClose, onAdd }: AddReferenceModalP
                 </div>
               ) : (
                 <div>
-                  <Upload className="h-12 w-12 mx-auto text-slate-400 mb-4" />
-                  <p className="text-slate-600 mb-2">Cliquez pour télécharger une image</p>
-                  <p className="text-sm text-slate-500">PNG, JPG, WebP jusqu'à 10MB</p>
+                  <Upload className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                  <p className="text-foreground mb-2">Cliquez pour télécharger une image</p>
+                  <p className="text-sm text-muted-foreground">PNG, JPG, WebP jusqu'à 10MB</p>
                 </div>
               )}
               <input
@@ -248,7 +248,7 @@ export const AddReferenceModal = ({ isOpen, onClose, onAdd }: AddReferenceModalP
             </Button>
             <Button 
               type="submit"
-              className="bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-700 hover:to-blue-700"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground neon-border"
             >
               Ajouter la référence
             </Button>

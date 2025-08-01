@@ -53,7 +53,7 @@ export const ReferenceDetailModal = ({ reference, isOpen, onClose }: ReferenceDe
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold text-slate-800 flex items-center justify-between">
+          <DialogTitle className="text-xl font-semibold text-foreground flex items-center justify-between">
             {reference.title}
             <Badge variant="outline">{reference.collection}</Badge>
           </DialogTitle>
@@ -79,7 +79,7 @@ export const ReferenceDetailModal = ({ reference, isOpen, onClose }: ReferenceDe
               </Button>
               <Button
                 onClick={copyPrompt}
-                className="flex-1 bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-700 hover:to-blue-700"
+                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground neon-border"
               >
                 <Copy className="h-4 w-4 mr-2" />
                 Copier le prompt
@@ -91,23 +91,23 @@ export const ReferenceDetailModal = ({ reference, isOpen, onClose }: ReferenceDe
           <div className="space-y-6">
             {/* Prompt */}
             <div>
-              <h3 className="font-semibold text-slate-800 mb-2">Prompt</h3>
-              <div className="bg-slate-50 rounded-lg p-4 border">
-                <p className="text-slate-700 leading-relaxed">{reference.prompt}</p>
+              <h3 className="font-semibold text-foreground mb-2">Prompt</h3>
+              <div className="bg-muted rounded-lg p-4 border border-border">
+                <p className="text-foreground leading-relaxed">{reference.prompt}</p>
               </div>
             </div>
 
             {/* Metadata */}
             <div className="grid grid-cols-1 gap-4">
               {/* Date */}
-              <div className="flex items-center gap-2 text-sm text-slate-600">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Calendar className="h-4 w-4" />
                 <span>Créé le {formatDate(reference.createdAt)}</span>
               </div>
 
               {/* Model */}
               {reference.model && (
-                <div className="flex items-center gap-2 text-sm text-slate-600">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Cpu className="h-4 w-4" />
                   <span>{reference.model}</span>
                 </div>
@@ -115,9 +115,9 @@ export const ReferenceDetailModal = ({ reference, isOpen, onClose }: ReferenceDe
 
               {/* Parameters */}
               {reference.parameters && (
-                <div className="flex items-center gap-2 text-sm text-slate-600">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Settings className="h-4 w-4" />
-                  <code className="bg-slate-100 px-2 py-1 rounded text-xs">
+                  <code className="bg-muted px-2 py-1 rounded text-xs text-foreground">
                     {reference.parameters}
                   </code>
                 </div>
@@ -127,7 +127,7 @@ export const ReferenceDetailModal = ({ reference, isOpen, onClose }: ReferenceDe
             {/* Tags */}
             {reference.tags.length > 0 && (
               <div>
-                <h3 className="font-semibold text-slate-800 mb-2">Tags</h3>
+                <h3 className="font-semibold text-foreground mb-2">Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {reference.tags.map(tag => (
                     <Badge key={tag} variant="secondary">
@@ -139,9 +139,9 @@ export const ReferenceDetailModal = ({ reference, isOpen, onClose }: ReferenceDe
             )}
 
             {/* Tips */}
-            <div className="bg-gradient-to-r from-violet-50 to-blue-50 p-4 rounded-lg border border-violet-200">
-              <h4 className="font-medium text-violet-800 mb-2">💡 Conseils d'utilisation</h4>
-              <ul className="text-sm text-violet-700 space-y-1">
+            <div className="bg-muted/50 p-4 rounded-lg border border-border neon-border">
+              <h4 className="font-medium text-foreground mb-2 neon-cyan">💡 Conseils d'utilisation</h4>
+              <ul className="text-sm text-muted-foreground space-y-1">
                 <li>• Adaptez le prompt selon votre modèle IA</li>
                 <li>• Testez différents paramètres pour varier les résultats</li>
                 <li>• Combinez plusieurs techniques pour plus de créativité</li>
