@@ -173,8 +173,8 @@ const Index = () => {
 
           {/* References Grid */}
           <div className={viewMode === 'grid' 
-            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 md:gap-4 lg:gap-6" 
-            : "space-y-3 md:space-y-4"
+            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 md:gap-4 lg:gap-6 justify-items-center sm:justify-items-stretch" 
+            : "space-y-3 md:space-y-4 flex flex-col items-center sm:items-stretch"
           }>
             {filteredReferences.map(reference => (
               <ReferenceCard 

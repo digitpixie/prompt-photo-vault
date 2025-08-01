@@ -43,7 +43,7 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
   if (viewMode === 'list') {
     return (
       <>
-        <Card className="group hover:shadow-lg transition-all duration-300 border-border bg-card">
+        <Card className="group hover:shadow-lg transition-all duration-300 border-border bg-card w-full max-w-sm sm:max-w-none mx-auto sm:mx-0">
           <div className="flex flex-col sm:flex-row">
             <div className="w-full sm:w-32 h-48 sm:h-32 flex-shrink-0">
               <img
@@ -112,7 +112,7 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
 
   return (
     <>
-      <Card className="group hover:shadow-xl transition-all duration-300 border-border bg-card overflow-hidden">
+      <Card className="group hover:shadow-xl transition-all duration-300 border-border bg-card overflow-hidden w-full max-w-sm sm:max-w-none mx-auto sm:mx-0">
         <div className="relative">
           <img
             src={reference.image}
