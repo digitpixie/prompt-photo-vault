@@ -33,10 +33,11 @@ export const CollectionSidebar = ({
       )}
       
       <aside className={cn(
-        "w-64 bg-card border-r border-border h-full z-50 transition-transform duration-300 overflow-y-auto",
-        "lg:translate-x-0", // Always visible on desktop
+        "w-64 bg-card border-r border-border transition-transform duration-300 overflow-y-auto",
+        "lg:static lg:h-full", // Static on desktop
+        "fixed top-0 left-0 h-screen z-50", // Fixed on mobile
         !isOpen && onClose && "-translate-x-full", // Hidden on mobile when closed
-        isOpen && onClose && "fixed h-screen" // Fixed positioning on mobile when open
+        isOpen && onClose && "translate-x-0" // Visible on mobile when open
       )}>
         <div className="p-2 lg:p-4">
           <div className="flex items-center justify-between mb-4">
