@@ -149,6 +149,7 @@ export const AddReferenceModal = ({ isOpen, onClose, onAdd }: AddReferenceModalP
                 accept="image/*"
                 onChange={handleImageUpload}
                 className="absolute inset-0 opacity-0 cursor-pointer"
+                style={{ zIndex: -1 }}
               />
             </div>
           </div>
