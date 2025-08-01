@@ -65,7 +65,7 @@ export const PromptScanner = ({ onTextExtracted, children }: PromptScannerProps)
     if (extractedText.trim()) {
       onTextExtracted(extractedText);
       setIsOpen(false);
-      setExtractedText('');
+      resetScanner();
       toast.success('Texte appliqué au prompt !');
     }
   };
