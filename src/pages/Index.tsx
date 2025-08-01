@@ -80,9 +80,9 @@ const Index = () => {
           onSelectCollection={setSelectedCollection}
         />
         
-        <main className="flex-1 p-2 md:p-4">
+        <main className="flex-1 pt-2 px-2 md:px-4">
           {/* Desktop Header */}
-          <div className="mb-2">
+          <div>
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
               <div>
                 <h1 className="text-3xl md:text-4xl font-bold text-white neon-purple neon-glow animate-neon-pulse">
