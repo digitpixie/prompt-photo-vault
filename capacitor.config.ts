@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'app.lovable.730c2dde1a57402782355b15e82f0bbe',
+  appId: 'com.lovable.promptphotovault',
   appName: 'prompt-photo-vault',
   webDir: 'dist',
   server: {
