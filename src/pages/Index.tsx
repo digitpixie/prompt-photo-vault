@@ -73,8 +73,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Desktop Layout */}
-      <div className="hidden lg:flex">
-        <CollectionSidebar 
+      <div className="hidden lg:flex h-screen">
+        <CollectionSidebar
           collections={collections}
           selectedCollection={selectedCollection}
           onSelectCollection={setSelectedCollection}
