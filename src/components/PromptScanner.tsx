@@ -36,9 +36,11 @@ export const PromptScanner = ({ onTextExtracted, children }: PromptScannerProps)
       setProgress(100);
       
       if (text.trim()) {
+        console.log('Setting extracted text:', text);
         setExtractedText(text);
         toast.success('Texte extrait avec succès !');
       } else {
+        console.log('No text extracted or text is empty');
         toast.warning('Aucun texte détecté dans l\'image. Vérifiez que le texte est bien visible.');
       }
     } catch (error) {
