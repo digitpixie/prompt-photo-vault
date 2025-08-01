@@ -86,7 +86,7 @@ const Index = () => {
           <div style={{margin: 0, padding: "8px"}}>
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
               <div>
-                <h1 className="text-3xl md:text-4xl font-bold text-white neon-purple neon-glow animate-neon-pulse">
+                <h1 className="text-3xl md:text-4xl font-bold text-white">
                   Bibliothèque IA
                 </h1>
                 <p className="text-muted-foreground mt-2 text-sm md:text-base">
@@ -197,7 +197,7 @@ const Index = () => {
               >
                 <Menu className="h-5 w-5 text-white" />
               </button>
-              <h1 className="text-xl font-bold text-white neon-purple neon-glow">
+              <h1 className="text-xl font-bold text-white">
                 Bibliothèque IA
               </h1>
             </div>
