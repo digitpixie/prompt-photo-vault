@@ -170,7 +170,10 @@ export const AddReferenceModal = ({ isOpen, onClose, onAdd }: AddReferenceModalP
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="prompt">Prompt *</Label>
-              <PromptScanner onTextExtracted={(text) => setFormData(prev => ({ ...prev, prompt: text }))}>
+              <PromptScanner onTextExtracted={(text) => {
+                console.log('Text received in AddReferenceModal:', text);
+                setFormData(prev => ({ ...prev, prompt: text }));
+              }}>
                 <Button type="button" variant="outline" size="sm" className="h-8">
                   <Scan className="h-4 w-4 mr-1" />
                   Scanner
