@@ -112,7 +112,7 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
 
   return (
     <>
-      <Card className="group hover:shadow-xl transition-all duration-300 border-border bg-card overflow-hidden w-full max-w-sm sm:max-w-none mx-auto sm:mx-0">
+      <Card className="group hover:shadow-xl transition-all duration-300 border-border bg-card overflow-hidden w-full max-w-xs sm:max-w-none">
         <div className="relative">
           <img
             src={reference.image}
