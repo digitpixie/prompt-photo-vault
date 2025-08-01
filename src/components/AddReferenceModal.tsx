@@ -6,8 +6,9 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { X, Upload, Plus } from 'lucide-react';
+import { X, Upload, Plus, Scan } from 'lucide-react';
 import { toast } from 'sonner';
+import { PromptScanner } from './PromptScanner';
 
 interface Reference {
   title: string;
@@ -166,12 +167,20 @@ export const AddReferenceModal = ({ isOpen, onClose, onAdd }: AddReferenceModalP
 
           {/* Prompt */}
           <div className="space-y-2">
-            <Label htmlFor="prompt">Prompt *</Label>
+            <div className="flex items-center justify-between">
+              <Label htmlFor="prompt">Prompt *</Label>
+              <PromptScanner onTextExtracted={(text) => setFormData(prev => ({ ...prev, prompt: text }))}>
+                <Button type="button" variant="outline" size="sm" className="h-8">
+                  <Scan className="h-4 w-4 mr-1" />
+                  Scanner
+                </Button>
+              </PromptScanner>
+            </div>
             <Textarea
               id="prompt"
               value={formData.prompt}
               onChange={(e) => setFormData(prev => ({ ...prev, prompt: e.target.value }))}
-              placeholder="Décrivez le prompt utilisé pour générer cette image..."
+              placeholder="Décrivez le prompt utilisé pour générer cette image ou utilisez le scanner..."
               rows={4}
               required
             />
