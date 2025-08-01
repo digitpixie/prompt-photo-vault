@@ -31,7 +31,7 @@ export const AddReferenceModal = ({ isOpen, onClose, onAdd }: AddReferenceModalP
   const [formData, setFormData] = useState<Reference>({
     title: '',
     prompt: '',
-    image: '',
+    image: 'https://via.placeholder.com/400x300?text=Image+Placeholder', // Image par défaut
     tags: [],
     collection: '',
     type: 'photo',
@@ -113,46 +113,6 @@ export const AddReferenceModal = ({ isOpen, onClose, onAdd }: AddReferenceModalP
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Image Upload */}
-            <div className="space-y-2">
-            <Label htmlFor="image">Image *</Label>
-            <div className="relative border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer">
-              {formData.image ? (
-                <div className="relative">
-                  <img
-                    src={formData.image}
-                    alt="Preview"
-                    className="max-h-48 mx-auto rounded-lg"
-                  />
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    size="sm"
-                    className="absolute top-2 right-2 z-10"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setFormData(prev => ({ ...prev, image: '' }));
-                      setImageFile(null);
-                    }}
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
-                </div>
-              ) : (
-                <div>
-                  <Upload className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                  <p className="text-foreground mb-2">Cliquez pour télécharger une image</p>
-                  <p className="text-sm text-muted-foreground">PNG, JPG, WebP jusqu'à 10MB</p>
-                </div>
-              )}
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="absolute inset-0 opacity-0 cursor-pointer"
-              />
-            </div>
-          </div>
 
           {/* Title */}
           <div className="space-y-2">
