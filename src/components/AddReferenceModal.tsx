@@ -15,6 +15,7 @@ interface Reference {
   image: string;
   tags: string[];
   collection: string;
+  type: 'photo' | 'video';
   model?: string;
   parameters?: string;
 }
@@ -32,6 +33,7 @@ export const AddReferenceModal = ({ isOpen, onClose, onAdd }: AddReferenceModalP
     image: '',
     tags: [],
     collection: '',
+    type: 'photo',
     model: '',
     parameters: ''
   });
@@ -85,6 +87,7 @@ export const AddReferenceModal = ({ isOpen, onClose, onAdd }: AddReferenceModalP
       image: '',
       tags: [],
       collection: '',
+      type: 'photo',
       model: '',
       parameters: ''
     });
@@ -174,16 +177,32 @@ export const AddReferenceModal = ({ isOpen, onClose, onAdd }: AddReferenceModalP
             />
           </div>
 
-          {/* Collection */}
-          <div className="space-y-2">
-            <Label htmlFor="collection">Collection *</Label>
-            <Input
-              id="collection"
-              value={formData.collection}
-              onChange={(e) => setFormData(prev => ({ ...prev, collection: e.target.value }))}
-              placeholder="Ex: Portraits, Landscapes, Abstract..."
-              required
-            />
+          {/* Collection & Type */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="collection">Collection *</Label>
+              <Input
+                id="collection"
+                value={formData.collection}
+                onChange={(e) => setFormData(prev => ({ ...prev, collection: e.target.value }))}
+                placeholder="Ex: Portraits, Landscapes, Abstract..."
+                required
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="type">Type *</Label>
+              <select
+                id="type"
+                value={formData.type}
+                onChange={(e) => setFormData(prev => ({ ...prev, type: e.target.value as 'photo' | 'video' }))}
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                required
+              >
+                <option value="photo">📸 Photo</option>
+                <option value="video">🎬 Vidéo</option>
+              </select>
+            </div>
           </div>
 
           {/* Model */}

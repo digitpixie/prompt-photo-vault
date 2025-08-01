@@ -14,6 +14,7 @@ interface Reference {
   image: string;
   tags: string[];
   collection: string;
+  type: 'photo' | 'video'; // Nouveau champ pour différencier photo/vidéo
   createdAt: Date;
   model?: string;
   parameters?: string;
@@ -28,6 +29,7 @@ const Index = () => {
       image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=400&fit=crop',
       tags: ['portrait', 'cyberpunk', 'neon', 'futuristic'],
       collection: 'Portraits',
+      type: 'photo',
       createdAt: new Date(),
       model: 'Midjourney v6',
       parameters: '--ar 1:1 --style raw'
@@ -39,9 +41,22 @@ const Index = () => {
       image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=400&fit=crop',
       tags: ['landscape', 'fantasy', 'magical', 'forest'],
       collection: 'Landscapes',
+      type: 'photo',
       createdAt: new Date(),
       model: 'DALL-E 3',
       parameters: 'HD quality'
+    },
+    {
+      id: '3',
+      title: 'Cinematic Drone Shot',
+      prompt: 'Cinematic drone shot of a mountain valley at sunset, epic landscapes, dramatic lighting, 4K video, smooth camera movement',
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop',
+      tags: ['cinematic', 'drone', 'landscape', 'sunset'],
+      collection: 'Vidéos',
+      type: 'video',
+      createdAt: new Date(),
+      model: 'Runway ML',
+      parameters: '4K, 30fps'
     }
   ]);
 

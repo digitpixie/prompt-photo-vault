@@ -14,6 +14,7 @@ interface Reference {
   image: string;
   tags: string[];
   collection: string;
+  type: 'photo' | 'video';
   createdAt: Date;
   model?: string;
   parameters?: string;
@@ -135,7 +136,10 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
         <CardHeader className="pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
           <div className="flex items-start justify-between gap-2">
             <h3 className="font-semibold text-white truncate text-sm sm:text-base">{reference.title}</h3>
-            <Badge variant="outline" className="text-xs flex-shrink-0">{reference.collection}</Badge>
+            <div className="flex gap-1 flex-shrink-0">
+              <Badge variant="outline" className="text-xs">{reference.type === 'photo' ? '📸' : '🎬'}</Badge>
+              <Badge variant="outline" className="text-xs">{reference.collection}</Badge>
+            </div>
           </div>
         </CardHeader>
 
