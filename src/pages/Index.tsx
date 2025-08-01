@@ -70,6 +70,7 @@ const Index = () => {
     setReferences(prev => [reference, ...prev]);
   };
 
+  console.log('Index component rendered - debugging margin issue');
   return (
     <div className="min-h-screen bg-background" style={{margin: 0, padding: 0}}>
       {/* Desktop Layout */}
