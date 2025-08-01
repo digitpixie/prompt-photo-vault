@@ -114,9 +114,9 @@ export const AddReferenceModal = ({ isOpen, onClose, onAdd }: AddReferenceModalP
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Image Upload */}
-          <div className="space-y-2">
+            <div className="space-y-2">
             <Label htmlFor="image">Image *</Label>
-            <div className="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary transition-colors">
+            <div className="relative border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer">
               {formData.image ? (
                 <div className="relative">
                   <img
@@ -128,8 +128,9 @@ export const AddReferenceModal = ({ isOpen, onClose, onAdd }: AddReferenceModalP
                     type="button"
                     variant="destructive"
                     size="sm"
-                    className="absolute top-2 right-2"
-                    onClick={() => {
+                    className="absolute top-2 right-2 z-10"
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setFormData(prev => ({ ...prev, image: '' }));
                       setImageFile(null);
                     }}
@@ -149,7 +150,6 @@ export const AddReferenceModal = ({ isOpen, onClose, onAdd }: AddReferenceModalP
                 accept="image/*"
                 onChange={handleImageUpload}
                 className="absolute inset-0 opacity-0 cursor-pointer"
-                style={{ zIndex: -1 }}
               />
             </div>
           </div>
