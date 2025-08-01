@@ -1,17 +1,21 @@
 
-import { Folder, FolderOpen, Hash, Palette } from 'lucide-react';
+import { Folder, FolderOpen, Hash, Palette, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface CollectionSidebarProps {
   collections: string[];
   selectedCollection: string;
   onSelectCollection: (collection: string) => void;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
 export const CollectionSidebar = ({ 
   collections, 
   selectedCollection, 
-  onSelectCollection 
+  onSelectCollection,
+  isOpen = true,
+  onClose
 }: CollectionSidebarProps) => {
   const getCollectionIcon = (collection: string) => {
     if (collection === 'Tous') return Hash;
@@ -19,12 +23,36 @@ export const CollectionSidebar = ({
   };
 
   return (
-    <aside className="w-64 bg-white border-r border-slate-200 h-screen sticky top-0">
-      <div className="p-6">
-        <div className="flex items-center gap-2 mb-6">
-          <Palette className="h-6 w-6 text-violet-600" />
-          <h2 className="font-semibold text-slate-800">Collections</h2>
-        </div>
+    <>
+      {/* Mobile overlay */}
+      {isOpen && onClose && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={onClose}
+        />
+      )}
+      
+      <aside className={cn(
+        "w-64 bg-card border-r border-border h-screen sticky top-0 z-50 transition-transform duration-300",
+        "lg:translate-x-0", // Always visible on desktop
+        !isOpen && onClose && "-translate-x-full", // Hidden on mobile when closed
+        isOpen && onClose && "fixed" // Fixed positioning on mobile when open
+      )}>
+        <div className="p-4 lg:p-6">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2">
+              <Palette className="h-6 w-6 neon-purple" />
+              <h2 className="font-semibold text-white">Collections</h2>
+            </div>
+            {onClose && (
+              <button
+                onClick={onClose}
+                className="lg:hidden p-1 rounded-md hover:bg-muted text-white"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            )}
+          </div>
 
         <nav className="space-y-1">
           {collections.map((collection) => {
@@ -38,17 +66,17 @@ export const CollectionSidebar = ({
                 className={cn(
                   "w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-all duration-200",
                   isSelected
-                    ? "bg-gradient-to-r from-violet-100 to-blue-100 text-violet-700 font-medium"
-                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-800"
+                    ? "bg-primary text-primary-foreground neon-border"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 )}
               >
                 <Icon className={cn(
                   "h-4 w-4",
-                  isSelected ? "text-violet-600" : "text-slate-400"
+                  isSelected ? "text-primary-foreground" : "text-muted-foreground"
                 )} />
                 <span className="truncate">{collection}</span>
                 {collection === 'Tous' && (
-                  <span className="ml-auto text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">
+                  <span className="ml-auto text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full">
                     {collections.length - 1}
                   </span>
                 )}
@@ -57,13 +85,14 @@ export const CollectionSidebar = ({
           })}
         </nav>
 
-        <div className="mt-8 p-4 bg-gradient-to-br from-violet-50 to-blue-50 rounded-lg border border-violet-100">
-          <h3 className="font-medium text-slate-800 mb-2">💡 Astuce</h3>
-          <p className="text-sm text-slate-600">
+        <div className="mt-8 p-4 bg-muted/50 rounded-lg border border-border neon-border">
+          <h3 className="font-medium text-white mb-2 neon-cyan">💡 Astuce</h3>
+          <p className="text-sm text-muted-foreground">
             Organisez vos prompts par style, technique ou projet pour retrouver facilement vos références.
           </p>
         </div>
       </div>
     </aside>
+    </>
   );
 };
