@@ -33,13 +33,13 @@ export const CollectionSidebar = ({
       )}
       
       <aside className={cn(
-        "w-64 bg-card border-r border-border h-full z-50 transition-transform duration-300",
+        "w-64 bg-card border-r border-border h-full z-50 transition-transform duration-300 overflow-y-auto",
         "lg:translate-x-0", // Always visible on desktop
         !isOpen && onClose && "-translate-x-full", // Hidden on mobile when closed
         isOpen && onClose && "fixed h-screen" // Fixed positioning on mobile when open
       )}>
-        <div className="p-4 lg:p-6">
-          <div className="flex items-center justify-between mb-6">
+        <div className="p-2 lg:p-4">
+          <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Palette className="h-6 w-6 neon-purple" />
               <h2 className="font-semibold text-white">Collections</h2>
