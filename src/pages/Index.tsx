@@ -72,46 +72,19 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="flex">
-        {/* Desktop Sidebar */}
-        <div className="hidden lg:block">
-          <CollectionSidebar 
-            collections={collections}
-            selectedCollection={selectedCollection}
-            onSelectCollection={setSelectedCollection}
-          />
-        </div>
-
-        {/* Mobile Sidebar */}
+      {/* Desktop Layout */}
+      <div className="hidden lg:flex">
         <CollectionSidebar 
           collections={collections}
           selectedCollection={selectedCollection}
-          onSelectCollection={(collection) => {
-            setSelectedCollection(collection);
-            setIsSidebarOpen(false); // Close sidebar after selection on mobile
-          }}
-          isOpen={isSidebarOpen}
-          onClose={() => setIsSidebarOpen(false)}
+          onSelectCollection={setSelectedCollection}
         />
         
-        <main className="flex-1 p-4 md:p-6 lg:ml-0">
-          {/* Header */}
+        <main className="flex-1 p-4 md:p-6">
+          {/* Desktop Header */}
           <div className="mb-6 md:mb-8">
-            {/* Mobile menu button */}
-            <div className="flex items-center gap-4 mb-4 lg:hidden">
-              <button
-                onClick={() => setIsSidebarOpen(true)}
-                className="p-2 rounded-lg bg-card border border-border hover:bg-muted transition-colors"
-              >
-                <Menu className="h-5 w-5 text-white" />
-              </button>
-              <h1 className="text-xl font-bold text-white neon-purple neon-glow">
-                Bibliothèque IA
-              </h1>
-            </div>
-
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-              <div className="hidden lg:block">
+              <div>
                 <h1 className="text-3xl md:text-4xl font-bold text-white neon-purple neon-glow animate-neon-pulse">
                   Bibliothèque IA
                 </h1>
@@ -189,6 +162,115 @@ const Index = () => {
             <div className="text-center py-12">
               <div className="text-white text-lg mb-2 neon-purple neon-glow">Aucune référence trouvée</div>
               <p className="text-muted-foreground text-sm md:text-base">
+                {searchQuery || selectedCollection !== 'Tous' 
+                  ? 'Essayez de modifier vos critères de recherche'
+                  : 'Commencez par ajouter votre première référence'
+                }
+              </p>
+            </div>
+          )}
+        </main>
+      </div>
+
+      {/* Mobile Layout */}
+      <div className="lg:hidden w-full">
+        {/* Mobile Sidebar */}
+        <CollectionSidebar 
+          collections={collections}
+          selectedCollection={selectedCollection}
+          onSelectCollection={(collection) => {
+            setSelectedCollection(collection);
+            setIsSidebarOpen(false);
+          }}
+          isOpen={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
+        />
+        
+        <main className="w-full p-4">
+          {/* Mobile Header */}
+          <div className="mb-6">
+            <div className="flex items-center gap-4 mb-6">
+              <button
+                onClick={() => setIsSidebarOpen(true)}
+                className="p-2 rounded-lg bg-card border border-border hover:bg-muted transition-colors"
+              >
+                <Menu className="h-5 w-5 text-white" />
+              </button>
+              <h1 className="text-xl font-bold text-white neon-purple neon-glow">
+                Bibliothèque IA
+              </h1>
+            </div>
+
+            <div className="mb-6">
+              <Button 
+                onClick={() => setIsAddModalOpen(true)}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground neon-border w-full"
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                Ajouter une référence
+              </Button>
+            </div>
+
+            {/* Search and filters */}
+            <div className="flex flex-col gap-3 mb-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                <Input
+                  placeholder="Rechercher par titre, prompt ou tags..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 bg-card border-border neon-cyan/20 focus:neon-border text-white placeholder:text-muted-foreground text-sm"
+                />
+              </div>
+              
+              <div className="flex items-center gap-2 justify-center">
+                <Button
+                  variant={viewMode === 'grid' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setViewMode('grid')}
+                  className={viewMode === 'grid' ? 'neon-border' : ''}
+                >
+                  <Grid className="h-4 w-4" />
+                  <span className="ml-2">Grille</span>
+                </Button>
+                <Button
+                  variant={viewMode === 'list' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setViewMode('list')}
+                  className={viewMode === 'list' ? 'neon-border' : ''}
+                >
+                  <List className="h-4 w-4" />
+                  <span className="ml-2">Liste</span>
+                </Button>
+              </div>
+            </div>
+
+            {/* Stats */}
+            <div className="flex items-center gap-4 text-xs text-muted-foreground">
+              <span className="neon-cyan">{filteredReferences.length} référence{filteredReferences.length !== 1 ? 's' : ''}</span>
+              <span className="neon-purple">•</span>
+              <span className="neon-violet">{collections.length - 1} collection{collections.length !== 2 ? 's' : ''}</span>
+            </div>
+          </div>
+
+          {/* References Grid */}
+          <div className={viewMode === 'grid' 
+            ? "flex flex-col items-center gap-3 w-full" 
+            : "space-y-3 w-full"
+          }>
+            {filteredReferences.map(reference => (
+              <ReferenceCard 
+                key={reference.id}
+                reference={reference}
+                viewMode={viewMode}
+              />
+            ))}
+          </div>
+
+          {filteredReferences.length === 0 && (
+            <div className="text-center py-12">
+              <div className="text-white text-lg mb-2 neon-purple neon-glow">Aucune référence trouvée</div>
+              <p className="text-muted-foreground text-sm">
                 {searchQuery || selectedCollection !== 'Tous' 
                   ? 'Essayez de modifier vos critères de recherche'
                   : 'Commencez par ajouter votre première référence'
