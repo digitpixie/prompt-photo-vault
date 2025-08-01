@@ -71,18 +71,18 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" style={{margin: 0, padding: 0}}>
       {/* Desktop Layout */}
-      <div className="hidden lg:flex h-screen">
-        <CollectionSidebar
+      <div className="hidden lg:flex h-screen" style={{margin: 0, padding: 0}}>
+        <CollectionSidebar 
           collections={collections}
           selectedCollection={selectedCollection}
           onSelectCollection={setSelectedCollection}
         />
         
-        <main className="flex-1 px-2 md:px-4">
+        <main className="flex-1" style={{margin: 0, padding: 0}}>
           {/* Desktop Header */}
-          <div>
+          <div style={{margin: 0, padding: "8px"}}>
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
               <div>
                 <h1 className="text-3xl md:text-4xl font-bold text-white neon-purple neon-glow animate-neon-pulse">
