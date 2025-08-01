@@ -55,7 +55,7 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
             
             <div className="flex-1 p-4">
               <div className="flex items-start justify-between mb-2">
-                <h3 className="font-semibold text-white line-clamp-1 text-sm sm:text-base">{reference.title}</h3>
+                <h3 className="font-semibold text-white truncate text-sm sm:text-base">{reference.title}</h3>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -66,7 +66,7 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
                 </Button>
               </div>
               
-              <p className="text-white text-xs sm:text-sm line-clamp-2 mb-3">{reference.prompt}</p>
+              <p className="text-white text-xs sm:text-sm mb-3 overflow-hidden">{reference.prompt.slice(0, 100)}...</p>
               
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div className="flex flex-wrap gap-1">
@@ -134,13 +134,13 @@ export const ReferenceCard = ({ reference, viewMode }: ReferenceCardProps) => {
 
         <CardHeader className="pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
           <div className="flex items-start justify-between gap-2">
-            <h3 className="font-semibold text-white line-clamp-1 text-sm sm:text-base">{reference.title}</h3>
+            <h3 className="font-semibold text-white truncate text-sm sm:text-base">{reference.title}</h3>
             <Badge variant="outline" className="text-xs flex-shrink-0">{reference.collection}</Badge>
           </div>
         </CardHeader>
 
         <CardContent className="pb-2 px-3 sm:px-6">
-          <p className="text-white text-xs sm:text-sm line-clamp-2 sm:line-clamp-3 mb-3">{reference.prompt}</p>
+          <p className="text-white text-xs sm:text-sm mb-3 overflow-hidden">{reference.prompt.slice(0, 120)}...</p>
           
           <div className="flex flex-wrap gap-1 mb-3">
             {reference.tags.slice(0, 2).map(tag => (
